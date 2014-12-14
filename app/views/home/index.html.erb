@@ -1,0 +1,131 @@
+<div ng-controller="MainController">
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Questioning House</a>
+            </div>
+            <ul class="navbar-right">
+                <li><a href="#" class="btn btn-primary navbar-btn" data-toggle="modal" data-target="#askQuestionModal">Ask
+                    a Question »</a></li>
+            </ul>
+
+        </div>
+    </div>
+
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+        <div class="container">
+            <h3>Welcome...</h3>
+
+            <p>
+                <a href="#" class="btn btn-primary btn-lg" role="button" data-toggle="modal" data-target="#askQuestionModal">Ask
+                    a Question »</a></p>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Example row of columns -->
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Questions</h2>
+
+                <div class="row replace-with-data">
+
+                    <div class="col-md-6" ng-repeat="question in questions">
+                        <div class="well">
+                            <div class="media">
+                                <a class="pull-left">
+                                    <img class="media-object img-circle" ng-src="{{question.gravatar_url}}" alt="...">
+                                </a>
+
+                                <div class="media-body"><h4 class="media-heading">{{question.email}} asks</h4>
+
+                                    <p>{{question.body}}</p>
+                                    <a ng-click="getAnswers(question.id)" class="btn btn-info pull-right">View Answers »</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Answers</h2>
+
+                <div class="row replace-with-data">
+
+                    <div class="col-md-6" ng-repeat="answer in answers">
+                        <div class="well">
+                            <div class="media">
+
+                                <div class="media-body"><h4 class="media-heading">{{answer.email}} says</h4>
+
+                                    <p>{{answer.body}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <hr>
+
+        <footer>
+            <p>© <a href="#" onclick="clearLocalStorage();">Questioning House 2014</a></p>
+        </footer>
+    </div>
+    <!-- /container -->
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="askQuestionModal" tabindex="-1" role="dialog" aria-labelledby="askQuestionModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="askQuestionModalLabel">So what would you like to know?</h4>
+
+                </div>
+                <form class="form-horizontal" id="submit-a-question" role="form" onsubmit="addQuestion()">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="inputEmail" class="col-sm-2 control-label">Email</label>
+
+                            <div class="col-sm-10">
+                                <input type="email" class="form-control" id="email" placeholder="Email" ng-model="email">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputQuestion" class="col-sm-2 control-label">Question</label>
+
+                            <div class="col-sm-10">
+                                <textarea class="form-control" rows="8" placeholder="Ask your Question here..." id="question" ng-model="body"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" ng-click="addQuestion()">Bring me my answers »
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
